@@ -1,15 +1,17 @@
-<div>
-    <h1> The list of tasks</h1>
-</div>
+@extends('layouts.app')
+
+@section('title', 'The list of Tasks')
 
 <div>
-    <h2>hello, I am blade template!</h2>
+    @section('content')
+        <h2>hello, I am blade template!</h2>
 
-    @forelse ($tasks as $task)
-        <div>
-            <a href="{{ route('tasks.show', ['id' => $task->id]) }}">{{ $task->title }}</a>
-        </div>
-    @empty
-        <div>There is no tasks</div>
-    @endforelse
+        @forelse ($tasks as $task)
+            <div>
+                <a href="{{ route('tasks.show', ['id' => $task->id]) }}">{{ $task->title }}</a>
+            </div>
+        @empty
+            <div>There is no tasks</div>
+        @endforelse
+    @endsection
 </div>
