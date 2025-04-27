@@ -2,22 +2,24 @@
 
 @section('title', 'The list of Tasks')
 
-<div>
-    @section('content')
-        <h2>hello, I am blade template!</h2>
 
-        @forelse ($tasks as $task)
-            <div>
-                <a href="{{ route('tasks.show', ['task' => $task->id]) }}">{{ $task->title }}</a>
-            </div>
-        @empty
-            <div>There is no tasks</div>
-        @endforelse
+@section('content')
+    <nav class="mb-4">
+        <a href="{{ route('tasks.create') }}" class="font-medium text-gray-700 underline decoration-pink-500">Add Task</a>
+    </nav>
 
-        @if ($tasks->count())
-            <div>
-                {{ $tasks->links() }}
-            </div>
-        @endif
-    @endsection
-</div>
+
+    @forelse ($tasks as $task)
+        <div>
+            <a href="{{ route('tasks.show', ['task' => $task->id]) }}" @class(['line-through' => $task->completed])>{{ $task->title }}</a>
+        </div>
+    @empty
+        <div>There is no tasks</div>
+    @endforelse
+
+    @if ($tasks->count())
+        <nav class="mt-4">
+            {{ $tasks->links() }}
+        </nav>
+    @endif
+@endsection
